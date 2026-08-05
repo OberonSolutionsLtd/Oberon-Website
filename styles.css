@@ -1,0 +1,230 @@
+/* ---------- Brand fonts ---------- */
+@font-face {
+  font-family: 'Deutsch Gothic';
+  src: url('fonts/Deutsch.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('fonts/ProximaNova-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('fonts/ProximaNova-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- Reset ---------- */
+:root {
+  --bg: #050505;
+  --fg: #ffffff;
+  --nav: #e6e6e6;
+  --nav-hover: #ffffff;
+  --footer: #7a7a7a;
+  --body-copy: #dcdcdc;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: 'Proxima Nova', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 3rem 1.5rem 5rem;
+  text-align: center;
+}
+
+/* ---------- Wordmark (home) ---------- */
+.brand {
+  font-family: 'Deutsch Gothic', cursive;
+  font-size: clamp(4.5rem, 16vw, 13rem);
+  line-height: 1;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: var(--fg);
+  animation: reveal 0.9s ease-out both;
+}
+
+.brand span:nth-child(1) { margin-right: -0.04em; }
+.brand span:nth-child(3) { margin-right: 0.03em; }
+.brand span:nth-child(4) { margin-right: -0.06em; }
+
+/* ---------- Nav ---------- */
+nav {
+  margin-top: clamp(0.85rem, 1.6vw, 1rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  animation: reveal 0.9s ease-out 0.15s both;
+}
+
+nav.nav-spaced {
+  margin-top: 4rem; /* adjust until it looks right */
+}
+
+nav a {
+  color: var(--nav);
+  text-decoration: none;
+  font-weight: 400;
+  font-size: clamp(0.85rem, 1.6vw, 1rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+}
+
+nav a:hover,
+nav a:focus-visible {
+  color: var(--nav-hover);
+}
+
+nav a:focus-visible {
+  outline: 1px solid var(--nav-hover);
+  outline-offset: 4px;
+}
+
+/* ---------- About page copy ---------- */
+.copy {
+  max-width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  font-weight: 300;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  line-height: 1.6;
+  color: var(--body-copy);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+  animation: reveal 0.9s ease-out both;
+}
+
+.copy a {
+  color: inherit;
+  font-weight: 400;
+  text-decoration: none;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.copy a:hover,
+.copy a:focus-visible {
+  color: var(--nav-hover);
+}
+
+.copy a:focus-visible {
+  outline: 1px solid var(--nav-hover);
+  outline-offset: 4px;
+}
+
+/* ---------- Footer ---------- */
+footer {
+  position: fixed;
+  bottom: 1.75rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-weight: 300;
+  font-size: 0.7rem;
+  letter-spacing: 0.03em;
+  color: var(--footer);
+}
+
+/* ---------- Email choice modal ---------- */
+.mail-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  align-items: center;
+  justify-content: center;
+}
+
+.mail-modal.is-open {
+  display: flex;
+}
+
+.mail-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.mail-modal__box {
+  position: relative;
+  background: #0f0f0f;
+  border: 1px solid #2a2a2a;
+  border-radius: 6px;
+  padding: 2rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  animation: reveal 0.25s ease-out both;
+}
+
+.mail-modal__label {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--footer);
+}
+
+.mail-modal__actions {
+  display: flex;
+  gap: 1.75rem;
+}
+
+.mail-modal__btn {
+  background: none;
+  border: none;
+  color: var(--nav);
+  font-family: 'Proxima Nova', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400;
+  font-size: clamp(0.85rem, 1.6vw, 1rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.mail-modal__btn:hover,
+.mail-modal__btn:focus-visible {
+  color: var(--nav-hover);
+}
+
+.mail-modal__btn:focus-visible {
+  outline: 1px solid var(--nav-hover);
+  outline-offset: 4px;
+}
+
+@keyframes reveal {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand, nav, .copy, .mail-modal__box {
+    animation: none;
+  }
+}
