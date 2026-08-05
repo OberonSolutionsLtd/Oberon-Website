@@ -5,6 +5,57 @@
   var GMAIL_URL = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + EMAIL;
   var MAILTO_URL = 'mailto:' + EMAIL;
 
+  /* ---------- Gmail: try the app first on mobile, fall back to web ---------- */
+  function openGmail() {
+    var ua = navigator.userAgent || '';
+    var isIOS = /iphone|ipad|ipod/i.test(ua);
+    var isAndroid = /android/i.test(ua);
+
+    if (isIOS) {
+      // iOS Gmail app registers this scheme for "compose" (co).
+      var iosAppUrl = 'googlegmail://co?to=' + encodeURIComponent(EMAIL);
+
+      var timer = setTimeout(function () {
+        // If we're still here (and the tab is still visible) after ~1.4s,
+        // the app almost certainly isn't installed, so fall back to web.
+        if (!document.hidden) {
+          window.location.href = GMAIL_URL;
+        }
+      }, 1400);
+
+      var onHide = function () {
+        if (document.hidden) {
+          clearTimeout(timer);
+          document.removeEventListener('visibilitychange', onHide);
+        }
+      };
+      document.addEventListener('visibilitychange', onHide);
+
+      window.location.href = iosAppUrl;
+    } else if (isAndroid) {
+      // Android "intent" links: Chrome (and most Chromium-based Android
+      // browsers) natively opens the named app if installed, or falls
+      // back to browser_fallback_url itself if it isn't -- no timer needed.
+      var intentUrl =
+        'intent://co?to=' + encodeURIComponent(EMAIL) +
+        '#Intent;scheme=googlegmail;package=com.google.android.gm;' +
+        'S.browser_fallback_url=' + encodeURIComponent(GMAIL_URL) + ';end';
+
+      window.location.href = intentUrl;
+
+      // Safety net for the minority of Android browsers that don't
+      // understand intent:// links at all (e.g. some non-Chromium browsers).
+      setTimeout(function () {
+        if (!document.hidden) {
+          window.location.href = GMAIL_URL;
+        }
+      }, 1400);
+    } else {
+      // Desktop: unchanged from before.
+      window.open(GMAIL_URL, '_blank', 'noopener');
+    }
+  }
+
   /* ---------- Email choice modal ---------- */
   var modal = document.getElementById('mailModal');
 
@@ -33,7 +84,7 @@
     var gmailBtn = modal.querySelector('[data-mail-gmail]');
     if (gmailBtn) {
       gmailBtn.addEventListener('click', function () {
-        window.open(GMAIL_URL, '_blank', 'noopener');
+        openGmail();
         closeModal();
       });
     }
