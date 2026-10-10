@@ -56,6 +56,11 @@
     }
   }
 
+  /* ---------- Footer year: keep the copyright current ---------- */
+  document.querySelectorAll('[data-year]').forEach(function (el) {
+    el.textContent = new Date().getFullYear();
+  });
+
   /* ---------- Email choice modal ---------- */
   var modal = document.getElementById('mailModal');
 
