@@ -134,9 +134,11 @@
   }
 
   if (chosenImage) {
-    // Slightly darker overlay on the About page, since there's body copy
-    // to read there rather than just a wordmark and short nav labels.
-    var overlayOpacity = document.body.classList.contains('page-about') ? 0.4 : 0.16;
+    // Slightly darker overlay on the About and Projects pages, since there's
+    // body copy to read there rather than just a wordmark and short nav labels.
+    var hasBodyCopy = document.body.classList.contains('page-about') ||
+      document.body.classList.contains('page-projects');
+    var overlayOpacity = hasBodyCopy ? 0.4 : 0.16;
     document.body.style.backgroundImage =
       'linear-gradient(rgba(0,0,0,' + overlayOpacity + '), rgba(0,0,0,' + overlayOpacity + ')), url("' + chosenImage + '")';
     document.body.style.backgroundSize = 'cover';

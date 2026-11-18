@@ -137,6 +137,27 @@ nav a:focus-visible {
   outline-offset: 4px;
 }
 
+/* ---------- Projects page ---------- */
+.projects {
+  list-style: none;
+  max-width: 36rem;
+  gap: 2.75rem;
+}
+
+.projects li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.projects__name {
+  color: var(--fg);
+  font-weight: 400;
+  font-size: clamp(0.85rem, 1.6vw, 1rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
 /* ---------- Footer ---------- */
 footer {
   position: fixed;
